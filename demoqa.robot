@@ -1,10 +1,12 @@
 *** Settings ***
 Library           Browser
-Suite Setup       New Browser    chromium    headless=False
+Suite Setup       New Browser    chromium    headless=False    slowMo=500ms
+
 
 *** Test Cases ***
 Accordion Panel Expansion
     [Documentation]            Verify that accordion panels expand when clicked
+    [Tags]                     accordion
     New Page                   https://demoqa.com/accordian    wait_until=domcontentloaded
     Wait For Elements State    xpath=//div[@id='section1Content']    state=visible
     Click                      xpath=//div[@id='section1Heading']
@@ -14,22 +16,27 @@ Accordion Panel Expansion
 
 Auto Complete Suggestions
     [Documentation]            Validate auto-complete suggestions
+    [Tags]                     auto-complete
     New Page                   https://demoqa.com/auto-complete    wait_until=domcontentloaded
-    Type Text                  id=autoCompleteMultipleInput    gr    
-    Keyboard Key               action=down        key=Enter
+    Type Text                  id=autoCompleteMultipleInput    gr
+    ${innerHtmlMultiColors}    Get Property    css=.auto-complete__menu    innerHTML
+    Log                        ${innerHtmlMultiColors}
+    Click                      xpath=//*[contains(@class, "auto-complete__option")][contains(text(), "Green")]
     Wait For Elements State    xpath=//*[contains(@class, "auto-complete__multi-value__label")][contains(text(), "Green")]    state=visible
     Type Text                  id=autoCompleteSingleInput    re
-    Keyboard Key               action=down        key=Enter
+    ${innerHtmlSingleColor}    Get Property    css=.auto-complete__menu    innerHTML
+    Log                        ${innerHtmlSingleColor}
+    Click                      xpath=//*[contains(@class, "auto-complete__option")][contains(text(), "Red")]
     Wait For Elements State    xpath=//*[contains(@class, "auto-complete__single")][contains(text(), "Red")]    state=visible
     
-
-# Date Picker Selection
-#     [Documentation]    Choose a date from the date picker
-#     Go To    https://demoqa.com/datepicker
-#     Click    id=datePickerMonthYearInput
-#     Click    xpath=//div[@class='react-datepicker__month']//div[text()='May']
-#     Click    xpath=//div[@class='react-datepicker__day react-datepicker__day--015']
-#     Element Should Contain    id=datePickerMonthYearInput    05/15/2023
+Date Picker Selection
+    [Documentation]            Choose a date from the date picker
+    [Tags]                     date-picker
+    New Page                   https://demoqa.com/date-picker
+    Click                      id=datePickerMonthYearInput
+    Click                      xpath=//div[@class='react-datepicker__month']//div[text()='May']
+    Click                      xpath=//div[@class='react-datepicker__day react-datepicker__day--015']
+    Get Text                   id=datePickerMonthYearInput    05/15/2023
 
 # Menu Context Menu
 #     [Documentation]    Verify context menu functionality
@@ -67,4 +74,6 @@ Auto Complete Suggestions
 #     Click    id=oldSelectMenu
 #     Click    xpath=//div[@class='css-26l3qy-menu']//div[text()='Group 1, option 1']
 #     Element Should Contain    id=oldSelectMenu    Group 1, option 1
- 
+
+
+*** Keywords ***
