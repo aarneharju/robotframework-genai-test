@@ -8,11 +8,8 @@ Accordion Panel Expansion
     [Documentation]            Verify that accordion panels expand when clicked
     [Tags]                     accordion
     New Page                   https://demoqa.com/accordian    wait_until=domcontentloaded
-    Wait For Elements State    xpath=//div[@id='section1Content']    state=visible
-    Click                      xpath=//div[@id='section1Heading']
-    Wait For Elements State    xpath=//div[@id='section1Content']    state=hidden
-    Click                      xpath=//div[@id='section3Heading']
-    Wait For Elements State    xpath=//div[@id='section3Content']    state=visible
+    
+    Click accordion panel elements and validate that they expand and contract
 
 Auto Complete Suggestions
     [Documentation]            Validate auto-complete suggestions
@@ -77,3 +74,9 @@ Date Picker Selection
 
 
 *** Keywords ***
+Click accordion panel elements and validate that they expand and contract
+    Wait For Elements State    xpath=//div[@id='section1Content']    state=visible
+    Click                      xpath=//div[@id='section1Heading']
+    Wait For Elements State    xpath=//div[@id='section1Content']    state=hidden
+    Click                      xpath=//div[@id='section3Heading']
+    Wait For Elements State    xpath=//div[@id='section3Content']    state=visible
