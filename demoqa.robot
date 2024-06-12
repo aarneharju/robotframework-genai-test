@@ -8,23 +8,17 @@ Accordion Panel Expansion
     [Documentation]            Verify that accordion panels expand when clicked
     [Tags]                     accordion
     New Page                   https://demoqa.com/accordian    wait_until=domcontentloaded
-    
+
     Click accordion panel elements and validate that they expand and contract
 
 Auto Complete Suggestions
     [Documentation]            Validate auto-complete suggestions
     [Tags]                     auto-complete
     New Page                   https://demoqa.com/auto-complete    wait_until=domcontentloaded
-    Type Text                  id=autoCompleteMultipleInput    gr
-    ${innerHtmlMultiColors}    Get Property    css=.auto-complete__menu    innerHTML
-    Log                        ${innerHtmlMultiColors}
-    Click                      xpath=//*[contains(@class, "auto-complete__option")][contains(text(), "Green")]
-    Wait For Elements State    xpath=//*[contains(@class, "auto-complete__multi-value__label")][contains(text(), "Green")]    state=visible
-    Type Text                  id=autoCompleteSingleInput    re
-    ${innerHtmlSingleColor}    Get Property    css=.auto-complete__menu    innerHTML
-    Log                        ${innerHtmlSingleColor}
-    Click                      xpath=//*[contains(@class, "auto-complete__option")][contains(text(), "Red")]
-    Wait For Elements State    xpath=//*[contains(@class, "auto-complete__single")][contains(text(), "Red")]    state=visible
+
+    Type gr - select green - validate auto-completion
+    Type re - select red - validate auto-completion
+
     
 Date Picker Selection
     [Documentation]            Choose a date from the date picker
@@ -80,3 +74,17 @@ Click accordion panel elements and validate that they expand and contract
     Wait For Elements State    xpath=//div[@id='section1Content']    state=hidden
     Click                      xpath=//div[@id='section3Heading']
     Wait For Elements State    xpath=//div[@id='section3Content']    state=visible
+
+Type gr - select green - validate auto-completion
+    Type Text                  id=autoCompleteMultipleInput    gr
+    ${innerHtmlMultiColors}    Get Property    css=.auto-complete__menu    innerHTML
+    Log                        ${innerHtmlMultiColors}
+    Click                      xpath=//*[contains(@class, "auto-complete__option")][contains(text(), "Green")]
+    Wait For Elements State    xpath=//*[contains(@class, "auto-complete__multi-value__label")][contains(text(), "Green")]    state=visible
+
+Type re - select red - validate auto-completion
+    Type Text                  id=autoCompleteSingleInput    re
+    ${innerHtmlSingleColor}    Get Property    css=.auto-complete__menu    innerHTML
+    Log                        ${innerHtmlSingleColor}
+    Click                      xpath=//*[contains(@class, "auto-complete__option")][contains(text(), "Red")]
+    Wait For Elements State    xpath=//*[contains(@class, "auto-complete__single")][contains(text(), "Red")]    state=visible
