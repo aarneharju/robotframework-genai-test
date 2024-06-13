@@ -25,9 +25,15 @@ Date Picker Selection
     [Tags]                     date-picker
     New Page                   https://demoqa.com/date-picker
     Click                      id=datePickerMonthYearInput
-    Click                      xpath=//div[@class='react-datepicker__month']//div[text()='May']
-    Click                      xpath=//div[@class='react-datepicker__day react-datepicker__day--015']
-    Get Text                   id=datePickerMonthYearInput    05/15/2023
+    Click                      xpath=//select[@class="react-datepicker__year-select"]
+    Keyboard Input             type    2023
+    Keyboard Key               down    Enter
+    Click                      xpath=//select[@class="react-datepicker__month-select"]
+    Keyboard Input             type    May
+    Keyboard Key               down    Enter
+    Click                      xpath=//*[@class='react-datepicker__day react-datepicker__day--015']
+    Get Attribute              id=datePickerMonthYearInput    value    ==    05/15/2023
+       
 
 # Menu Context Menu
 #     [Documentation]    Verify context menu functionality
